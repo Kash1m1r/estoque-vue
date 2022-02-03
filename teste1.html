@@ -17,8 +17,22 @@
       <a href=""><img src="https://rickandmortyapi.com/api/character/avatar/164.jpeg"/></a>
       <p>Data de Criação: {{acoes.created}}</p>
       <a v-bind:href="link">Cliquei aqui</a>
-
     </div>
+
+    <div id="app2">
+        <button @click="contador++">Adcionar</button>
+        <br>
+        {{contador}}
+        <br>
+        <br>
+        <a href="#interno" @click.prevent.once="handleclick">Link</a>
+        <input type="text" @keyup="handleclick">
+        <input type="text" @keyup.enter="handleclick">
+        <br>
+        <p @mousemove="handleMove">Mouse: {{mouse.x}}</p>
+    </div>
+
+  
     <script>
         const vm = new Vue({
             el: "#app",
@@ -36,6 +50,24 @@
                 }
             }
         })
+
+        const vm2 = new Vue({
+            el: "#app2",
+            data: {
+                contador: 0,
+                mouse: ""
+            },
+            methods: {
+                handleclick(event) {
+                    console.log(event);
+                },
+                handleMove(event) {
+                    this.mouse = event;
+                }
+            }
+        })
+
+       
         
     </script>
 </body>
