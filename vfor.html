@@ -15,6 +15,11 @@
         <button @click="puxarApi" button type="button" class="btn btn-success">Puxar API</button>
         <br>
         {{local}}
+        <li v-for="dados, key in local">
+            <ul>
+                {{key}}: {{dados}}
+            </ul>
+        </li>
     </div>
     <script>
         const vm = new Vue ({
@@ -34,7 +39,9 @@
         })
     </script>
     <style>
-
+        ul#app {
+        list-style-type: none;
+        }
     </style>
 </body>
 </html>

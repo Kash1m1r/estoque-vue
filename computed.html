@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vue.js"></script>
+    <title>Computed</title>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="carro, key in carros">
+                {{key}} : {{carro}}
+            </li>
+        </ul>
+        <button @click="removerCarro">Apagar</button>
+        <br>
+        {{contador}}
+        <button @click="contador++">Adcionar</button>
+    </div>
+    <script>
+        const vm = new Vue({
+            el: "#app",
+            data: {
+                preco: 50,
+                carteira: 60,
+                contador: 0,
+                carros: [
+                {
+                    marca: "BMW",
+                    cor: "Laranja"
+                },
+                {
+                    marca: "Ford",
+                    cor: "Amarelo"
+                },
+                {
+                    marca: "Fiat",
+                    cor: "Laranja"
+                },
+                {
+                    marca: "Ferrari",
+                    cor: "Vermelho"
+                },   
+                ]          
+            },
+            computed: {
+                total() {
+                    return "R$" + (this.carteira - this.preco);
+                }
+            },
+            methods: {
+                removerCarro(){
+                    this.carros.pop();
+                }
+            },
+            watch: {
+                contador() {
+                    console.log(this.contador);
+                    this.removerCarro();
+                    
+                }
+            }
+        });
+
+
+    </script>
+</body>
+</html>
