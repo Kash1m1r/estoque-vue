@@ -11,12 +11,31 @@
     <div id="app">
         <input type="text" placeholder="Digite seu CEP" maxlength="8" v-model="cep">
         <h6>{{cep}}</h6>
+        <ul>
+            <li v-for="dados, key in endereco">
+                {{key}}: {{dados}}
+            </li>
+        </ul>
+
     </div>
     <script>
         const vm = new Vue({
             el: "#app",
             data: {
                 cep: "",
+                endereco: "",
+            },
+            watch: {
+                cep(valor){
+                    if(valor.length === 8){
+                        fetch(`https://viacep.com.br/ws/${valor}/json/`)
+                        .then(r => r.json())
+                        .then(r => {
+                        this.endereco = r;
+                    })
+                    }
+                    
+                }
             }
         })
     </script>
